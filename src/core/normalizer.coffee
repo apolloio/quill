@@ -65,10 +65,13 @@ class Normalizer
     return this.whitelistTags(node)
 
   whitelistStyles: (node) ->
+    
     original = dom(node).styles()
-    styles = _.omit(original, (value, key) =>
-      return !@whitelist.styles[camelize(key)]?
-    )
+    # remove for HTML editor styles
+    # styles = _.omit(original, (value, key) =>
+    #   return !@whitelist.styles[camelize(key)]?
+    # )
+    styles = original
     if Object.keys(styles).length < Object.keys(original).length
       if Object.keys(styles).length > 0
         dom(node).styles(styles, true)
